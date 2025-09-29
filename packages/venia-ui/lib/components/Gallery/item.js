@@ -48,7 +48,7 @@ const GalleryItem = props => {
     }
 
     // eslint-disable-next-line no-unused-vars
-    const { name, price_range, small_image, url_key, rating_summary } = item;
+    const { name, price_range, small_image, url_key, writername, rating_summary } = item;
 
     const { url: smallImageURL } = small_image;
     const productLink = resourceUrl(`/${url_key}${productUrlSuffix || ''}`);
@@ -122,10 +122,20 @@ const GalleryItem = props => {
             >
                 <span>{name}</span>
             </Link>
+            <Link
+                onClick={handleLinkClick}
+                to={productLink}
+                className={classes.name}
+                data-cy="GalleryItem-name"
+            >
+                <span>{writername}</span>
+            </Link>
 
-            <div data-cy="GalleryItem-price" className={classes.price}>
+
+
+            {/* <div data-cy="GalleryItem-price" className={classes.price}>
                 <Price value={priceSourceValue} currencyCode={currencyCode} />
-            </div>
+            </div> */}
 
             <div className={classes.actionsContainer}>
                 {' '}
