@@ -40,7 +40,7 @@ const AddToCartButton = props => {
             data-cy="AddToCartButton-buttonInStock"
             aria-label={formatMessage({
                 id: 'addToCartButton.addItemToCartAriaLabel',
-                defaultMessage: 'Add to Cart'
+                defaultMessage: 'Add to Cart 2'
             })}
             className={classes.root}
             disabled={isDisabled}
@@ -48,13 +48,13 @@ const AddToCartButton = props => {
             priority="high"
             type="button"
         >
-            {AddToCartIcon}
-            <span className={classes.text}>
+            {AddToCartIcon} ΔΑΝΕΙΣΜΟΣ
+            {/* <span className={classes.text}>
                 <FormattedMessage
                     id="addToCartButton.addItemToCart"
-                    defaultMessage="ADD TO CART"
+                    defaultMessage="ΔΑΝΕΙΣΜΟΣ"
                 />
-            </span>
+            </span> */}
         </Button>
     );
 
