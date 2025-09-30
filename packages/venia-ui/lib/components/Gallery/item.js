@@ -125,8 +125,8 @@ const GalleryItem = props => {
             <Link
                 onClick={handleLinkClick}
                 to={productLink}
-                className={classes.name}
-                data-cy="GalleryItem-name"
+                className={classes.writername}
+                data-cy="GalleryItem-writername"
             >
                 <span>{writername}</span>
             </Link>
