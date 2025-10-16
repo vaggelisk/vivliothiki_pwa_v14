@@ -17,6 +17,8 @@ export const ProductsFragment = gql`
             uid
             name
             writername
+            publisher
+            subjectddc
             price_range {
                 maximum_price {
                     final_price {

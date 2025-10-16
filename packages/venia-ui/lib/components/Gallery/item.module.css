@@ -53,6 +53,10 @@
     composes: font-semibold from global;
 }
 
+.writername {
+    composes: font-italian from global;
+}
+
 .name,
 .price {
     composes: text-colorDefault from global;
