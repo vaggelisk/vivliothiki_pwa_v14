@@ -1,3 +1,6 @@
 # All PRs opened by external members require triaging.
+# Label for all files — default triage label
 needs triage:
-    - '*'
+  - any: ['**/*']
+
+
