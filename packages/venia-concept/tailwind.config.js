@@ -84,7 +84,14 @@ const config = {
                 max: '1920px'
             }
         },
-        extend: {}
+        extend: {
+            fontFamily: {
+                sans: ['"Open Sans"', "sans-serif"],
+            },
+            spacing: {
+                filterSidebarWidth: "600px",
+            },
+        }
     }
 };
 

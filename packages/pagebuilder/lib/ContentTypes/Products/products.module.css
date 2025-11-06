@@ -2,6 +2,7 @@
 }
 .root a {
     text-decoration: none;
+    text-align: left;
 }
 
 .error {
