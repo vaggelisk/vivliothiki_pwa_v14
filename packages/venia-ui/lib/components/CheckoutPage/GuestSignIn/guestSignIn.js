@@ -62,12 +62,12 @@ const GuestSignIn = props => {
             </h1>
             <div className={classes.contentContainer}>
                 {content}
-                <LinkButton onClick={handleBackToCheckout}>
+                {/* <LinkButton onClick={handleBackToCheckout}>
                     <FormattedMessage
                         id="checkoutPage.guestSignIn.backToCheckout"
                         defaultMessage="Back to Checkout"
                     />
-                </LinkButton>
+                </LinkButton> */}
             </div>
         </div>
     );
