@@ -84,6 +84,16 @@ const CheckoutPage = props => {
 
     const [, { addToast }] = useToasts();
     const orderCount = localStorage.getItem('orderCount');
+    // 🚫 Prevent guest checkout – force login modal
+    useEffect(() => {
+        if (isGuestCheckout) {
+            // Open the sign-in modal immediately
+            toggleSignInContent();
+
+            // Optionally redirect away from checkout if needed:
+            // history.push('/'); 
+        }
+    }, [isGuestCheckout, toggleSignInContent]);
     useEffect(() => {
         if (isGuestCheckout && !orderDetailsData) {
             if (orderCount === '1') {

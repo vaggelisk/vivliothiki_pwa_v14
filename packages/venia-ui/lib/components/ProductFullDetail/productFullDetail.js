@@ -175,7 +175,7 @@ const ProductFullDetail = props => {
         !isEverythingOutOfStock || !isOutOfStock ? (
             <FormattedMessage
                 id="productFullDetail.addItemToCart"
-                defaultMessage="Add to Cart"
+                defaultMessage="Δανεισμός"
             />
         ) : (
             <FormattedMessage
@@ -252,7 +252,7 @@ const ProductFullDetail = props => {
                     >
                         {productDetails.name}
                     </h1>
-                    <p
+                    {/* <p
                         data-cy="ProductFullDetail-productPrice"
                         className={classes.productPrice}
                     >
@@ -260,8 +260,8 @@ const ProductFullDetail = props => {
                             currencyCode={productDetails.price.currency}
                             value={productDetails.price.value}
                         />
-                    </p>
-                    {shortDescription}
+                    </p> */}
+                    {/* {shortDescription} */}
                 </section>
                 <FormError
                     classes={{
@@ -269,7 +269,7 @@ const ProductFullDetail = props => {
                     }}
                     errors={errors.get('form') || []}
                 />
-                <section className={classes.options}>{options}</section>
+                {/* <section className={classes.options}>{options}</section>
                 <section className={classes.quantity}>
                     <span
                         data-cy="ProductFullDetail-quantityTitle"
@@ -285,7 +285,7 @@ const ProductFullDetail = props => {
                         min={1}
                         message={errors.get('quantity')}
                     />
-                </section>
+                </section> */}
                 <section className={classes.actions}>
                     {cartActionContent}
                     <Suspense fallback={null}>
