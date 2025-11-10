@@ -4,7 +4,6 @@ const accountLinks = new Map()
     .set('Account', null)
     .set('Sign In', null)
     .set('Register', null)
-    .set('Order Status', null)
     .set('Returns', null);
 
 const aboutLinks = new Map()
@@ -15,7 +14,6 @@ const aboutLinks = new Map()
 
 const helpLinks = new Map()
     .set('Help', null)
-    .set('Customer Service', '/customer-service')
     .set('Contact Us', {
         path: '/contact-us',
         Component: ContactLink
