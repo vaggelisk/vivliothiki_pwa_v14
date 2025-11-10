@@ -105,7 +105,7 @@ const PriceSummary = props => {
 
     return (
         <div className={classes.root} data-cy="PriceSummary-root">
-            <div>
+            {/* <div>
                 <ul>
                     <li className={classes.lineItems}>
                         <span
@@ -191,7 +191,7 @@ const PriceSummary = props => {
                         </span>
                     </li>
                 </ul>
-            </div>
+            </div> */}
             {proceedToCheckoutButton}
         </div>
     );

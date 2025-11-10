@@ -2,7 +2,7 @@ import { useState } from 'react';
 
 // TODO: Read the default/initial sort from config.
 const defaultSort = {
-    sortText: 'Position',
+    sortText: 'Θέση',
     sortId: 'sortItem.position',
     sortAttribute: 'position',
     sortDirection: 'ASC'

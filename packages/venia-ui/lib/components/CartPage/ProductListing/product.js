@@ -125,13 +125,13 @@ const Product = props => {
                             optionLabel: classes.optionLabel
                         }}
                     />
-                    <span className={classes.price} data-cy="Product-price">
+                    {/* <span className={classes.price} data-cy="Product-price">
                         <Price currencyCode={currency} value={unitPrice} />
                         <FormattedMessage
                             id={'product.price'}
                             defaultMessage={' ea.'}
                         />
-                    </span>
+                    </span> */}
                     <span className={classes.stockStatusMessage}>
                         {stockStatusMessage}
                     </span>

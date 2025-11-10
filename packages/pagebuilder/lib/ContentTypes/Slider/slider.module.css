@@ -11,8 +11,9 @@
 
 .bannerRoot {
     composes: root from '../Banner/banner.module.css';
-    min-height: inherit;
-    max-height: 680px;
+    /* min-height: inherit; */
+    min-height: 820px;
+    /* max-height: 680px; */
 }
 .bannerLink {
     composes: link from '../Banner/banner.module.css';

@@ -112,7 +112,7 @@ const Item = props => {
                     values={{ quantity }}
                 />
             </span>
-            <span data-cy="MiniCart-Item-price" className={classes.price}>
+            {/* <span data-cy="MiniCart-Item-price" className={classes.price}>
                 <Price
                     currencyCode={prices.price.currency}
                     value={prices.price.value}
@@ -121,7 +121,7 @@ const Item = props => {
                     id={'productList.each'}
                     defaultMessage={' ea.'}
                 />
-            </span>
+            </span> */}
             <span className={classes.stockStatus}>{stockStatusText}</span>
             <button
                 onClick={removeItem}

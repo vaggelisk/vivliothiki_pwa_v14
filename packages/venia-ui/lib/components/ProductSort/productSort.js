@@ -77,24 +77,24 @@ const ProductSort = props => {
                 attribute: 'relevance',
                 sortDirection: 'DESC'
             },
-            {
-                id: 'sortItem.priceDesc',
-                text: formatMessage({
-                    id: 'sortItem.priceDesc',
-                    defaultMessage: 'Price: High to Low'
-                }),
-                attribute: 'price',
-                sortDirection: 'DESC'
-            },
-            {
-                id: 'sortItem.priceAsc',
-                text: formatMessage({
-                    id: 'sortItem.priceAsc',
-                    defaultMessage: 'Price: Low to High'
-                }),
-                attribute: 'price',
-                sortDirection: 'ASC'
-            }
+            // {
+            //     id: 'sortItem.priceDesc',
+            //     text: formatMessage({
+            //         id: 'sortItem.priceDesc',
+            //         defaultMessage: 'Price: High to Low'
+            //     }),
+            //     attribute: 'price',
+            //     sortDirection: 'DESC'
+            // },
+            // {
+            //     id: 'sortItem.priceAsc',
+            //     text: formatMessage({
+            //         id: 'sortItem.priceAsc',
+            //         defaultMessage: 'Price: Low to High'
+            //     }),
+            //     attribute: 'price',
+            //     sortDirection: 'ASC'
+            // }
         ];
 
         // Do not display Position in Search
@@ -103,7 +103,7 @@ const ProductSort = props => {
                 id: 'sortItem.position',
                 text: formatMessage({
                     id: 'sortItem.position',
-                    defaultMessage: 'Position'
+                    defaultMessage: 'Θέση'
                 }),
                 attribute: 'position',
                 sortDirection: 'ASC'
