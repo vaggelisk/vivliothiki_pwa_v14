@@ -7,6 +7,8 @@ import { useCartContext } from '../../../context/cart';
 import CheckoutError from '../CheckoutError';
 import { useEventingContext } from '../../../context/eventing';
 import { CHECKOUT_STEP } from '../useCheckoutPage';
+import { gql } from '@apollo/client';
+
 
 /**
  *
@@ -88,6 +90,23 @@ export const usePaymentInformation = props => {
         setFreePaymentMethod,
         { loading: setFreePaymentMethodLoading }
     ] = useMutation(setFreePaymentMethodMutation);
+
+
+    const SET_CASH_PAYMENT_METHOD = gql`
+        mutation setCashPaymentMethod($cartId: String!) {
+            setPaymentMethodOnCart(
+                input: { cart_id: $cartId, payment_method: { code: "cashondelivery" } }
+            ) {
+                cart {
+                    selected_payment_method {
+                        code
+                    }
+                }
+            }
+        }
+    `;
+
+    const [setCashPaymentMethod] = useMutation(SET_CASH_PAYMENT_METHOD);
 
     const clearPaymentDetails = useCallback(() => {
         client.writeQuery({
@@ -173,6 +192,36 @@ export const usePaymentInformation = props => {
         setFreePaymentMethod
     ]);
 
+
+    // If cashondelivery is available and not selected, automatically select it.
+    useEffect(() => {
+        const setCashIfAvailable = async () => {
+            const cashIsAvailable = !!availablePaymentMethods.find(
+                ({ code }) => code === 'cashondelivery'
+            );
+            if (cashIsAvailable) {
+                if (selectedPaymentMethod !== 'cashondelivery') {
+                    await setCashPaymentMethod({
+                        variables: {
+                            cartId
+                        }
+                    });
+                    setDoneEditing(true);
+                } else {
+                    setDoneEditing(true);
+                }
+            }
+        };
+        setCashIfAvailable();
+    }, [
+        availablePaymentMethods,
+        cartId,
+        selectedPaymentMethod,
+        setDoneEditing,
+        setCashPaymentMethod
+    ]);
+
+
     const shippingAddressOnCart =
         (paymentInformationData &&
             paymentInformationData.cart.shipping_addresses.length &&
@@ -257,6 +306,16 @@ export const usePaymentInformation = props => {
             });
         }
     }, [cartId, selectedPaymentMethod, doneEditing, dispatch]);
+
+    useEffect(() => {
+        if (
+            availablePaymentMethods.length === 1 &&
+            availablePaymentMethods[0].code === 'cashondelivery'
+        ) {
+            setCheckoutStep(CHECKOUT_STEP.REVIEW);
+        }
+    }, [availablePaymentMethods, setCheckoutStep]);
+    
 
     return {
         doneEditing,

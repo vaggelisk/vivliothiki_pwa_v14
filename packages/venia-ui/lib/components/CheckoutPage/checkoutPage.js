@@ -220,8 +220,9 @@ const CheckoutPage = props => {
 
         // If we have an implementation, or if this is a "zero" checkout,
         // we can allow checkout to proceed.
+        // const isPaymentAvailable = true;
         const isPaymentAvailable = !!availablePaymentMethods.find(
-            ({ code }) => code === 'free' || paymentMethods.includes(code)
+            ({ code }) =>  code === 'free' || code === 'cashondelivery' || paymentMethods.includes(code)
         );
 
         if (!isPaymentAvailable) {
