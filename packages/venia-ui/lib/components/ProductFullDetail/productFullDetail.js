@@ -33,7 +33,7 @@ const ERROR_MESSAGE_TO_FIELD_MAPPING = {
 
 // Field level error messages for rendering.
 const ERROR_FIELD_TO_MESSAGE_MAPPING = {
-    quantity: 'The requested quantity is not available.'
+    quantity: 'Παρακαλούμε η ποσότητα να είναι 1.'
 };
 
 const ProductFullDetail = props => {
@@ -175,7 +175,7 @@ const ProductFullDetail = props => {
         !isEverythingOutOfStock || !isOutOfStock ? (
             <FormattedMessage
                 id="productFullDetail.addItemToCart"
-                defaultMessage="Δανεισμός"
+                defaultMessage="Δανεισμoς"
             />
         ) : (
             <FormattedMessage
@@ -269,7 +269,7 @@ const ProductFullDetail = props => {
                     }}
                     errors={errors.get('form') || []}
                 />
-                {/* <section className={classes.options}>{options}</section>
+                <section className={classes.options}>{options}</section>
                 <section className={classes.quantity}>
                     <span
                         data-cy="ProductFullDetail-quantityTitle"
@@ -283,14 +283,30 @@ const ProductFullDetail = props => {
                     <QuantityStepper
                         classes={{ root: classes.quantityRoot }}
                         min={1}
+                        max={1}
                         message={errors.get('quantity')}
                     />
-                </section> */}
+                </section>
                 <section className={classes.actions}>
                     {cartActionContent}
                     <Suspense fallback={null}>
                         <WishlistButton {...wishlistButtonProps} />
                     </Suspense>
+
+                    <span
+                        data-cy="ProductFullDetail-detailsTitle"
+                        className={classes.detailsTitle}
+                    >
+                        <FormattedMessage
+                            id={'productFullDetail.details'}
+                            defaultMessage={'Details'}
+                        />
+                    </span>
+                    <CustomAttributes
+                        customAttributes={customAttributesDetails.list}
+                    />
+
+       
                 </section>
                 <section className={classes.description}>
                     <span
@@ -304,7 +320,7 @@ const ProductFullDetail = props => {
                     </span>
                     <RichContent html={productDetails.description} />
                 </section>
-                <section className={classes.details}>
+                {/* <section className={classes.details}>
                     <span
                         data-cy="ProductFullDetail-detailsTitle"
                         className={classes.detailsTitle}
@@ -317,7 +333,7 @@ const ProductFullDetail = props => {
                     <CustomAttributes
                         customAttributes={customAttributesDetails.list}
                     />
-                </section>
+                </section> */}
                 {pageBuilderAttributes}
             </Form>
         </Fragment>
