@@ -113,12 +113,8 @@ const OrderConfirmationPage = props => {
                     <div className={classes.shippingInfo}>
                         <span className={classes.email}>{email}</span>
                         <span className={classes.name}>{nameString}</span>
-                        {streetRows}
-                        <span className={classes.addressAdditional}>
-                            {additionalAddressString}
-                        </span>
                     </div>
-                    <div
+                    {/* <div
                         data-cy="OrderConfirmationPage-shippingMethodHeading"
                         className={classes.shippingMethodHeading}
                     >
@@ -132,7 +128,7 @@ const OrderConfirmationPage = props => {
                     </div>
                     <div className={classes.itemsReview}>
                         <ItemsReview items={cartItems} />
-                    </div>
+                    </div> */}
                     <div
                         data-cy="OrderConfirmationPage-additionalText"
                         className={classes.additionalText}

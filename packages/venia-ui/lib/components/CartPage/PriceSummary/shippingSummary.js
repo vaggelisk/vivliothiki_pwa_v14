@@ -38,7 +38,7 @@ const ShippingSummary = props => {
         <Price value={shipping.value} currencyCode={shipping.currency} />
     ) : (
         <span>
-            <FormattedMessage id={'global.free'} defaultMessage={'FREE'} />
+            <FormattedMessage id={'global.free2'} defaultMessage={'Κλασική'} />
         </span>
     );
 
