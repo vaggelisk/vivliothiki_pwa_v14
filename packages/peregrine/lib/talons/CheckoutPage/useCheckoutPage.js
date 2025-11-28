@@ -3,7 +3,8 @@ import {
     useApolloClient,
     useLazyQuery,
     useMutation,
-    useQuery
+    useQuery,
+    gql
 } from '@apollo/client';
 import { useEventingContext } from '../../context/eventing';
 
@@ -18,6 +19,50 @@ import DEFAULT_OPERATIONS from './checkoutPage.gql.js';
 
 import CheckoutError from './CheckoutError';
 import { useGoogleReCaptcha } from '../../hooks/useGoogleReCaptcha';
+
+// Define the SetBillingAddressOnCart mutation
+const SET_BILLING_ADDRESS_ON_CART = gql`
+    mutation SetBillingAddressOnCart($cartId: String!, $sameAsShipping: Boolean!) {
+        setBillingAddressOnCart(
+            input: {
+                cart_id: $cartId
+                billing_address: { same_as_shipping: $sameAsShipping }
+            }
+        ) {
+            cart {
+                email
+                id
+                is_virtual
+                total_quantity
+                total_summary_quantity_including_config
+            }
+        }
+    }
+`;
+
+// Define the SetPaymentMethodAndPlaceOrder mutation
+const SET_PAYMENT_METHOD_AND_PLACE_ORDER = gql`
+    mutation SetPaymentMethodAndPlaceOrder($cartId: String!, $paymentCode: String!) {
+        setPaymentMethodAndPlaceOrder(
+            input: {
+                cart_id: $cartId
+                payment_method: { code: $paymentCode }
+            }
+        ) {
+            order {
+                order_id
+                order_number
+            }
+        }
+    }
+`;
+
+// Define the createEmptyCart mutation
+const CREATE_EMPTY_CART = gql`
+    mutation CreateEmptyCart {
+        createEmptyCart
+    }
+`;
 
 export const CHECKOUT_STEP = {
     SHIPPING_ADDRESS: 1,
@@ -71,14 +116,22 @@ export const CHECKOUT_STEP = {
  */
 export const useCheckoutPage = (props = {}) => {
     const history = useHistory();
+    const { setCartId } = useCartContext();
     const operations = mergeOperations(DEFAULT_OPERATIONS, props.operations);
     const {
         createCartMutation,
         getCheckoutDetailsQuery,
         getCustomerQuery,
-        getOrderDetailsQuery,
-        placeOrderMutation
+        getOrderDetailsQuery
     } = operations;
+
+     // Add a state variable for orderNumber
+     const [orderNumber, setOrderNumber] = useState(null);
+      // Add a state variable for orderNumber
+    const [placeOrderLoading, setPlaceOrderLoading] = useState(false);
+
+    const [createEmptyCartMutation] = useMutation(CREATE_EMPTY_CART);
+
 
     const { generateReCaptchaData, recaptchaWidgetProps } = useGoogleReCaptcha({
         currentForm: 'PLACE_ORDER',
@@ -107,14 +160,6 @@ export const useCheckoutPage = (props = {}) => {
     const [{ cartId }, { createCart, removeCart }] = useCartContext();
 
     const [fetchCartId] = useMutation(createCartMutation);
-    const [
-        placeOrder,
-        {
-            data: placeOrderData,
-            error: placeOrderError,
-            loading: placeOrderLoading
-        }
-    ] = useMutation(placeOrderMutation);
 
     const [
         getOrderDetails,
@@ -177,10 +222,10 @@ export const useCheckoutPage = (props = {}) => {
     }, []);
 
     const checkoutError = useMemo(() => {
-        if (placeOrderError) {
-            return new CheckoutError(placeOrderError);
+        if (placeOrderButtonClicked) {
+            return new CheckoutError('Error placing order');
         }
-    }, [placeOrderError]);
+    }, [placeOrderButtonClicked]);
 
     const handleReviewOrder = useCallback(() => {
         setReviewOrderButtonClicked(true);
@@ -239,20 +284,74 @@ export const useCheckoutPage = (props = {}) => {
 
     const [isPlacingOrder, setIsPlacingOrder] = useState(false);
 
+    // Define the mutations
+    const [setBillingAddressOnCart, { loading: billingLoading, error: billingError }] =
+        useMutation(SET_BILLING_ADDRESS_ON_CART);
+
+    const [setPaymentMethodAndPlaceOrder, { loading: paymentLoading, error: paymentError }] =
+        useMutation(SET_PAYMENT_METHOD_AND_PLACE_ORDER);
+
     const handlePlaceOrder = useCallback(async () => {
-        // Fetch order details and then use an effect to actually place the
-        // order. If/when Apollo returns promises for invokers from useLazyQuery
-        // we can just await this function and then perform the rest of order
-        // placement.
-        await getOrderDetails({
-            variables: {
-                cartId
+        try {
+            // Step 1: Set billing address
+            console.log('ΑΑΑΑΑΑΑΑΑ Placing order for cart ID:', cartId);  
+            const billingResponse = await setBillingAddressOnCart({
+                variables: {
+                    cartId,
+                    sameAsShipping: true
+                }
+            });
+
+            if (!billingResponse?.data?.setBillingAddressOnCart) {
+                throw new Error('Failed to set billing address.');
             }
-        });
-        setPlaceOrderButtonClicked(true);
-        setIsPlacingOrder(true);
-        localStorage.setItem('orderCount', '1');
-    }, [cartId, getOrderDetails]);
+
+            // Step 2: Set payment method and place order/
+            const paymentResponse = await setPaymentMethodAndPlaceOrder({
+                variables: {
+                    cartId,
+                    paymentCode: 'cashondelivery' // Replace with the desired payment method code
+                }
+            });
+
+            if (!paymentResponse?.data?.setPaymentMethodAndPlaceOrder) {
+                throw new Error('Failed to place order.');
+            }
+
+            // Extract the orderNumber from the response
+            const order = paymentResponse.data.setPaymentMethodAndPlaceOrder.order;
+            setOrderNumber(order.order_number); // Update the state with the order number
+
+            // Dispatch the success action
+            console.log('Dispatching USER/SET_USER_ON_ORDER_SUCCESS');
+            dispatch({ type: 'USER/SET_USER_ON_ORDER_SUCCESS', payload: { order } });
+
+            // Order placed successfully
+            console.log('Order placed:', paymentResponse.data.setPaymentMethodAndPlaceOrder);
+
+            // Redirect to order-confirmation BEFORE clearing cart
+            history.push('/order-confirmation', {
+                orderNumber: order.order_number,
+                items: checkoutData?.cart?.items || []
+            });
+            
+            // 1) Clear old cart data properly
+            await removeCart();
+            await apolloClient.clearCacheData(apolloClient, 'cart');
+
+            // 2) Create a new empty cart the PWA Studio way
+            await createCart({ fetchCartId });
+
+
+
+
+        } catch (error) {
+            console.error('Error placing order:', error);
+        } finally {
+            // setIsPlacingOrder(false);
+            
+        }
+    }, [cartId, setBillingAddressOnCart, setPaymentMethodAndPlaceOrder]);
 
     const handlePlaceOrderEnterKeyPress = useCallback(() => {
         event => {
@@ -270,49 +369,6 @@ export const useCheckoutPage = (props = {}) => {
             setActiveContent('checkout');
         }
     }, [isSignedIn]);
-
-    useEffect(() => {
-        async function placeOrderAndCleanup() {
-            try {
-                const reCaptchaData = await generateReCaptchaData();
-
-                await placeOrder({
-                    variables: {
-                        cartId
-                    },
-                    ...reCaptchaData
-                });
-                // Cleanup stale cart and customer info.
-                await removeCart();
-                await apolloClient.clearCacheData(apolloClient, 'cart');
-
-                await createCart({
-                    fetchCartId
-                });
-            } catch (err) {
-                console.error(
-                    'An error occurred during when placing the order',
-                    err
-                );
-                setPlaceOrderButtonClicked(false);
-            }
-        }
-
-        if (orderDetailsData && isPlacingOrder) {
-            setIsPlacingOrder(false);
-            placeOrderAndCleanup();
-        }
-    }, [
-        apolloClient,
-        cartId,
-        createCart,
-        fetchCartId,
-        generateReCaptchaData,
-        orderDetailsData,
-        placeOrder,
-        removeCart,
-        isPlacingOrder
-    ]);
 
     useEffect(() => {
         if (
@@ -333,69 +389,24 @@ export const useCheckoutPage = (props = {}) => {
                     cart_id: cartId
                 }
             });
-        } else if (
-            placeOrderButtonClicked &&
-            orderDetailsData &&
-            orderDetailsData.cart
-        ) {
-            const shipping =
-                orderDetailsData.cart?.shipping_addresses &&
-                orderDetailsData.cart.shipping_addresses.reduce(
-                    (result, item) => {
-                        return [
-                            ...result,
-                            {
-                                ...item.selected_shipping_method
-                            }
-                        ];
-                    },
-                    []
-                );
-            const eventPayload = {
-                cart_id: cartId,
-                amount: orderDetailsData.cart.prices,
-                shipping: shipping,
-                payment: orderDetailsData.cart.selected_payment_method,
-                products: orderDetailsData.cart.items
-            };
-            if (isPlacingOrder) {
-                dispatch({
-                    type: 'CHECKOUT_PLACE_ORDER_BUTTON_CLICKED',
-                    payload: eventPayload
-                });
-            } else if (placeOrderData && orderDetailsData?.cart.id === cartId) {
-                dispatch({
-                    type: 'ORDER_CONFIRMATION_PAGE_VIEW',
-                    payload: {
-                        order_number:
-                            placeOrderData.placeOrder.order.order_number,
-                        ...eventPayload
-                    }
-                });
-            }
         }
     }, [
-        placeOrderButtonClicked,
         cartId,
         checkoutStep,
-        orderDetailsData,
         cartItems,
-        isLoading,
         dispatch,
-        placeOrderData,
-        isPlacingOrder,
         reviewOrderButtonClicked
     ]);
+
     useEffect(() => {
-        if (isSignedIn && placeOrderData) {
+        if (isSignedIn && placeOrderButtonClicked) {
             history.push('/order-confirmation', {
-                orderNumber: placeOrderData.placeOrder.order.order_number,
                 items: cartItems
             });
-        } else if (!isSignedIn && placeOrderData) {
+        } else if (!isSignedIn && placeOrderButtonClicked) {
             history.push('/checkout');
         }
-    }, [isSignedIn, placeOrderData, cartItems, history]);
+    }, [isSignedIn, placeOrderButtonClicked, cartItems, history]);
 
     return {
         activeContent,
@@ -416,9 +427,7 @@ export const useCheckoutPage = (props = {}) => {
         isUpdating,
         orderDetailsData,
         orderDetailsLoading,
-        orderNumber:
-            (placeOrderData && placeOrderData.placeOrder.order.order_number) ||
-            null,
+        orderNumber,
         placeOrderLoading,
         placeOrderButtonClicked,
         setCheckoutStep,
