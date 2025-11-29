@@ -50,9 +50,9 @@ const SuggestedProduct = props => {
                 data-cy="SuggestedProduct-image"
             />
             <span className={classes.name}>{name}</span>
-            <span data-cy="SuggestedProduct-price" className={classes.price}>
+            {/* <span data-cy="SuggestedProduct-price" className={classes.price}>
                 <Price {...priceProps} />
-            </span>
+            </span> */}
         </Link>
     );
 };

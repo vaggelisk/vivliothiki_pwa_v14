@@ -70,9 +70,9 @@ const Item = props => {
                     }}
                 />
             </span>
-            <div className={classes.price}>
+            {/* <div className={classes.price}>
                 <Price currencyCode={currency} value={unitPrice} />
-            </div>
+            </div> */}
             <Button
                 onClick={() => {
                     // TODO will be implemented in PWA-979
