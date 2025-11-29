@@ -93,7 +93,7 @@ const MiniCart = React.forwardRef((props, ref) => {
                     values={{ totalQuantity }}
                 />
             </span>
-            <span data-cy="MiniCart-subtotalPrice" className={priceClassName}>
+            {/* <span data-cy="MiniCart-subtotalPrice" className={priceClassName}>
                 <span data-cy="MiniCart-subtotalPriceLabel">
                     <FormattedMessage
                         id={'miniCart.subtotal'}
@@ -104,7 +104,7 @@ const MiniCart = React.forwardRef((props, ref) => {
                     currencyCode={subTotal.currency}
                     value={subTotal.value}
                 />
-            </span>
+            </span> */}
         </Fragment>
     ) : null;
 

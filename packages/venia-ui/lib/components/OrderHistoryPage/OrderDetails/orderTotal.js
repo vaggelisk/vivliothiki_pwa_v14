@@ -51,7 +51,7 @@ const OrderTotal = props => {
 
     return (
         <div className={classes.root}>
-            <div className={classes.heading}>
+            {/* <div className={classes.heading}>
                 <FormattedMessage
                     id="orderDetails.orderTotal"
                     defaultMessage="Order Total"
@@ -113,7 +113,7 @@ const OrderTotal = props => {
                         currencyCode={grand_total.currency}
                     />
                 </span>
-            </div>
+            </div> */}
         </div>
     );
 };
