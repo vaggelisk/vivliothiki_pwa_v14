@@ -98,7 +98,7 @@ const WishlistItem = props => {
         >
             {formatMessage({
                 id: 'wishlistItem.addToCart',
-                defaultMessage: 'Add to Cart'
+                defaultMessage: 'ΔΑΝΕΙΣΜΟΣ'
             })}
         </button>
     ) : null;
@@ -106,7 +106,7 @@ const WishlistItem = props => {
     return (
         <div className={rootClass} data-cy="wishlistItem-root">
             <a
-                href={product.url_key + '.html'}
+                href={product.url_key}
                 className={classes.name}
                 data-cy="wishlistItem-productLink"
             >
@@ -118,11 +118,12 @@ const WishlistItem = props => {
                     {name}
                 </span>
             </a>
+            
             <div
                 className={classes.priceContainer}
                 data-cy="wishlistItem-priceContainer"
             >
-                <Price currencyCode={currency} value={unitPrice} />
+                {/* <Price currencyCode={currency} value={unitPrice} /> */}
                 <button
                     style={{
                         float: 'right'
