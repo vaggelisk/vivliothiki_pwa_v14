@@ -84,7 +84,7 @@ const OrderRow = props => {
                 </span>
                 <span className={classes.orderDate}>{formattedDate}</span>
             </div>
-            <div className={classes.orderTotalContainer}>
+            {/* <div className={classes.orderTotalContainer}>
                 <span className={classes.orderTotalLabel}>
                     <FormattedMessage
                         id={'orderRow.orderTotalText'}
@@ -92,7 +92,7 @@ const OrderRow = props => {
                     />
                 </span>
                 <div className={classes.orderTotal}>{orderTotalPrice}</div>
-            </div>
+            </div> */}
             <div className={classes.orderItemsContainer}>
                 {collapsedImageGalleryElement}
             </div>

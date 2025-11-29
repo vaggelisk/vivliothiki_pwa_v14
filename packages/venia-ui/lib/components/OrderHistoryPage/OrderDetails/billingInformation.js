@@ -34,7 +34,7 @@ const BillingInformation = props => {
             className={classes.root}
             data-cy="OrderDetails-BillingInformation-root"
         >
-            <div className={classes.heading}>
+            {/* <div className={classes.heading}>
                 <FormattedMessage
                     id="orderDetails.billingInformationLabel"
                     defaultMessage="Billing Information"
@@ -44,7 +44,7 @@ const BillingInformation = props => {
             {streetRows}
             <div className={classes.additionalAddress}>
                 {additionalAddressString}
-            </div>
+            </div> */}
         </div>
     );
 };
