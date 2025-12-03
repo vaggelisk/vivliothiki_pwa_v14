@@ -51,6 +51,7 @@ const ForgotPasswordForm = props => {
                     type="button"
                     priority="low"
                     onClick={onCancel}
+                    onTouchStart={onCancel}
                 >
                     <FormattedMessage
                         id={'forgotPasswordForm.cancelButtonText'}

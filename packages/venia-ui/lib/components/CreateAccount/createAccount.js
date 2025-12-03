@@ -50,6 +50,7 @@ const CreateAccount = props => {
             type="button"
             priority="low"
             onClick={handleCancel}
+            onTouchStart={handleCancel}
             onKeyDown={handleCancelKeyPress}
         >
             <FormattedMessage
