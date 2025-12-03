@@ -108,6 +108,7 @@ const SignIn = props => {
                         classes={forgotPasswordClasses}
                         type="button"
                         onClick={handleForgotPassword}
+                        onTouchStart={handleForgotPassword}
                         onKeyDown={forgotPasswordHandleEnterKeyPress}
                         data-cy="SignIn-forgotPasswordButton"
                     >
@@ -135,6 +136,7 @@ const SignIn = props => {
                         priority="normal"
                         type="button"
                         onClick={handleCreateAccount}
+                        onTouchStart={handleCreateAccount}
                         data-cy="CreateAccount-initiateButton"
                         onKeyDown={handleEnterKeyPress}
                     >
