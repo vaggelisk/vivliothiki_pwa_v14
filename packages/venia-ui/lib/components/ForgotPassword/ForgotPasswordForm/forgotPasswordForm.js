@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { bool, func, shape, string } from 'prop-types';
 import { Form } from 'informed';
@@ -22,12 +22,21 @@ const ForgotPasswordForm = props => {
     } = props;
 
     const { formatMessage } = useIntl();
+    const formApiRef = useRef(null);
+
+    const handleTouchSubmit = (event) => {
+        event.preventDefault();
+        if (formApiRef.current) {
+            formApiRef.current.submitForm();
+        }
+    };
 
     return (
         <Form
             className={classes.root}
             initialValues={initialValues}
             onSubmit={onSubmit}
+            apiRef={formApiRef}
             data-cy="forgotPasswordForm-root"
         >
             <Field
@@ -63,6 +72,7 @@ const ForgotPasswordForm = props => {
                     disabled={isResettingPassword}
                     type="submit"
                     priority="high"
+                    onTouchStart={handleTouchSubmit}
                     data-cy="forgotPasswordForm-submitButton"
                 >
                     <FormattedMessage
