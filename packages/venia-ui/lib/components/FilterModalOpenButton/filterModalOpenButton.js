@@ -35,7 +35,7 @@ const FilterModalOpenButton = props => {
             })}
         >
             <FormattedMessage
-                id={'productList.filter'}
+                id={'productListMobile.filter'}
                 defaultMessage={'Filter'}
             />
         </Button>
