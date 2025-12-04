@@ -1,4 +1,4 @@
-import React, { useMemo, Fragment, Suspense } from 'react';
+import React, { useMemo, Fragment, Suspense, useRef } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { arrayOf, bool, number, shape, string } from 'prop-types';
 import { Form } from 'informed';
@@ -60,6 +60,14 @@ const ProductFullDetail = props => {
     const { formatMessage } = useIntl();
 
     const classes = useStyle(defaultClasses, props.classes);
+    const formApiRef = useRef(null);
+
+    const handleTouchSubmit = (event) => {
+        event.preventDefault();
+        if (formApiRef.current) {
+            formApiRef.current.submitForm();
+        }
+    };
 
     const options = isProductConfigurable(product) ? (
         <Suspense fallback={<ProductOptionsShimmer />}>
@@ -201,6 +209,7 @@ const ProductFullDetail = props => {
                 }
                 priority="high"
                 type="submit"
+                onTouchStart={handleTouchSubmit}
             >
                 {cartCallToActionText}
             </Button>
@@ -240,6 +249,7 @@ const ProductFullDetail = props => {
                 className={classes.root}
                 data-cy="ProductFullDetail-root"
                 onSubmit={handleAddToCart}
+                apiRef={formApiRef}
             >
                 <section className={classes.imageCarousel}>
                     <Carousel images={mediaGalleryEntries} />
