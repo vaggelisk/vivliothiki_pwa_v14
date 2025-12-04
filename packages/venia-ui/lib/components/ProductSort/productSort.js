@@ -192,7 +192,7 @@ const ProductSort = props => {
             >
                 <span className={classes.mobileText}>
                     <FormattedMessage
-                        id={'productSort.sortButton'}
+                        id={'productSortMobile.sortButton'}
                         defaultMessage={'Sort'}
                     />
                 </span>

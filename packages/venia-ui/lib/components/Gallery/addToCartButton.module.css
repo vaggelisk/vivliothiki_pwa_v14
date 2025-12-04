@@ -1,13 +1,13 @@
 .root {
     composes: root_highPriority from '../Button/button.module.css';
 
-    @apply min-w-[6.125rem];
+    @apply min-w-[7rem];
     composes: -ml-2xs from global;
-    @apply py-0;
+    @apply py-1;
     composes: self-center from global;
-    min-height: 2rem;
+    min-height: 2.5rem;
 
-    @apply sm_min-w-[8rem];
+    @apply sm_min-w-[9rem];
 }
 
 .icon {
