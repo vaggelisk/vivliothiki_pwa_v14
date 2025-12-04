@@ -88,7 +88,7 @@ const CategoryContent = props => {
     ) : null;
 
     const sidebar = shouldShowFilterButtons ? (
-        <FilterSidebar filters={filters} setFilterOptions={setFilterOptions} />
+        <FilterSidebar filters={filters} setFilterOptions={setFilterOptions} categoryId={categoryId} />
     ) : shouldShowFilterShimmer ? (
         <FilterSidebarShimmer />
     ) : null;
