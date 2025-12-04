@@ -7,6 +7,7 @@ import { useStyle } from '../../classify';
 import LinkButton from '../LinkButton';
 import CurrentFilters from '../FilterModal/CurrentFilters';
 import FilterBlock from '../FilterModal/filterBlock';
+import SubcategoryFilter from './SubcategoryFilter/subcategoryFilter';
 import defaultClasses from './filterSidebar.module.css';
 import { useLocation } from 'react-router-dom';
 
@@ -18,7 +19,7 @@ const SCROLL_OFFSET = 150;
  * @param {Object} props.filters - filters to display
  */
 const FilterSidebar = props => {
-    const { filters, filterCountToOpen, setFilterOptions } = props;
+    const { filters, filterCountToOpen, setFilterOptions, categoryId } = props;
     const talonProps = useFilterSidebar({ filters });
     const {
         filterApi,
@@ -149,6 +150,7 @@ const FilterSidebar = props => {
                     </h2>
                 </div>
                 {priceFilters}
+                {categoryId && <SubcategoryFilter categoryId={categoryId} />}
                 <CurrentFilters
                     filterApi={filterApi}
                     filterNames={filterNames}
@@ -182,7 +184,8 @@ FilterSidebar.propTypes = {
             items: array
         })
     ),
-    filterCountToOpen: number
+    filterCountToOpen: number,
+    categoryId: string
 };
 
 export default FilterSidebar;

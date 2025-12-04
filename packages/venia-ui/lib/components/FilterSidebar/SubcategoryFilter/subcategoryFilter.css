@@ -1,0 +1,30 @@
+.root {
+    margin-bottom: 1rem;
+}
+
+.title {
+    font-size: 14px;
+    font-weight: 600;
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+.list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.item {
+    margin: 4px 0;
+}
+
+.link {
+    text-decoration: none;
+    color: #333;
+    font-size: 14px;
+}
+
+.link:hover {
+    text-decoration: underline;
+}
