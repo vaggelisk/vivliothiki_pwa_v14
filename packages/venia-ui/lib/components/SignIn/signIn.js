@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { func, shape, string } from 'prop-types';
 import { Form } from 'informed';
@@ -26,6 +26,15 @@ const SignIn = props => {
     } = props;
 
     const { formatMessage } = useIntl();
+    const formApiRef = useRef(null);
+
+    const handleTouchSubmit = (event) => {
+        event.preventDefault();
+        if (formApiRef.current) {
+            formApiRef.current.submitForm();
+        }
+    };
+
     const talonProps = useSignIn({
         getCartDetailsQuery: GET_CART_DETAILS_QUERY,
         setDefaultUsername,
@@ -65,6 +74,7 @@ const SignIn = props => {
                 onSubmit={handleSubmit}
                 data-cy="SignIn-form"
                 initialValues={initialValues && initialValues}
+                apiRef={formApiRef}
             >
                 <Field
                     id="emailSignIn"
@@ -79,7 +89,6 @@ const SignIn = props => {
                         autoComplete="email"
                         field="email"
                         validate={isRequired}
-                        data-cy="email"
                         aria-label={formatMessage({
                             id: 'global.emailRequired',
                             defaultMessage: 'Email Required'
@@ -97,7 +106,6 @@ const SignIn = props => {
                     validate={isRequired}
                     autoComplete="current-password"
                     isToggleButtonHidden={false}
-                    data-cy="password"
                     aria-label={formatMessage({
                         id: 'global.passwordRequired',
                         defaultMessage: 'Password Required'
@@ -123,6 +131,7 @@ const SignIn = props => {
                     <Button
                         priority="high"
                         type="submit"
+                        onTouchStart={handleTouchSubmit}
                         onKeyDown={signinHandleEnterKeyPress}
                         data-cy="SignInButton-root_highPriority"
                         disabled={Boolean(isBusy)}

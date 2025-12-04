@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { Form } from 'informed';
 import { func, shape, string, bool } from 'prop-types';
@@ -41,6 +41,14 @@ const CreateAccount = props => {
     console.log('minimumPasswordLength==', minimumPasswordLength);
     const { formatMessage } = useIntl();
     const classes = useStyle(defaultClasses, props.classes);
+    const formApiRef = useRef(null);
+
+    const handleTouchSubmit = (event) => {
+        event.preventDefault();
+        if (formApiRef.current) {
+            formApiRef.current.submitForm();
+        }
+    };
 
     const cancelButton = props.isCancelButtonHidden ? null : (
         <Button
@@ -66,6 +74,7 @@ const CreateAccount = props => {
             disabled={Boolean(isDisabled)}
             type="submit"
             priority="high"
+            onTouchStart={handleTouchSubmit}
             onKeyDown={handleEnterKeyPress}
             data-cy="CreateAccount-submitButton"
         >
@@ -82,6 +91,7 @@ const CreateAccount = props => {
             className={classes.root}
             initialValues={initialValues}
             onSubmit={handleSubmit}
+            apiRef={formApiRef}
         >
             <h2 data-cy="CreateAccount-title" className={classes.title}>
                 <FormattedMessage
