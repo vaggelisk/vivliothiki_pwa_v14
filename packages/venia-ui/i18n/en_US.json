@@ -146,7 +146,7 @@
     "createAccount.createAccountText": "Δημιουργια λογαριασμου",
     "createAccount.emailText": "Email",
     "createAccount.firstNameText": "Όνομα",
-    "createAccount.lastNameText": "Επώνυμο",
+    "createAccount.lastNameText": "Επώνυμο (δεν χρειάζεται το επίσημο)",
     "createAccount.passwordText": "Κωδικός πρόσβασης",
     "createAccount.subscribeText": "Εγγραφή για νέα και ενημερώσεις",
     "createAccountPage.header": "Δημιουργία λογαριασμού",
