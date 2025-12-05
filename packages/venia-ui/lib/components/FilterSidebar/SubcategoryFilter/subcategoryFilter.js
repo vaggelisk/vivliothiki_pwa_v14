@@ -5,7 +5,6 @@ import { GET_SUBCATEGORIES } from '@magento/peregrine/lib/talons/FilterSidebar/q
 import classes from './subcategoryFilter.css';
 
 const SubcategoryFilter = ({ categoryId }) => {
-    console.log('SubcategoryFilter - categoryId:', categoryId, 'type:', typeof categoryId);
     
     // Decode base64 UID to get numeric ID
     let numericCategoryId = null;
@@ -24,23 +23,17 @@ const SubcategoryFilter = ({ categoryId }) => {
     }
     
     const shouldSkip = !numericCategoryId || isNaN(numericCategoryId);
-    
-    console.log('SubcategoryFilter - numericCategoryId:', numericCategoryId);
-    console.log('SubcategoryFilter - shouldSkip:', shouldSkip);
+
     
     const { data, loading, error } = useQuery(GET_SUBCATEGORIES, {
         variables: { id: numericCategoryId },
         skip: shouldSkip
     });
 
-    console.log('SubcategoryFilter - data:', data);
-    console.log('SubcategoryFilter - loading:', loading);
-    console.log('SubcategoryFilter - error:', error);
 
     if (shouldSkip) return null;
     if (loading) return null;
     if (error) {
-        console.error('SubcategoryFilter error:', error);
         return null;
     }
     if (!data?.category?.children?.length) return null;
