@@ -87,10 +87,7 @@ const config = {
         extend: {
             fontFamily: {
                 sans: ['"Open Sans"', "sans-serif"],
-            },
-            spacing: {
-                filterSidebarWidth: "600px",
-            },
+            }
         }
     }
 };
