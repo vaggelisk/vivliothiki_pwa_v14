@@ -57,3 +57,10 @@
     composes: root;
     composes: root from '../Slider/slider.module.css';
 }
+
+/* Custom width for product images in carousel */
+.carousel :global .slick-slide img {
+    width: 200px;
+    max-width: 100%;
+    margin: 0 auto;
+}
