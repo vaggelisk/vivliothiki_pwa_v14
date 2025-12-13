@@ -85,16 +85,14 @@ const Footer = props => {
                         <li>
                             <Facebook size={20} />
                         </li>
-                        <li>
-                            <Twitter size={20} />
-                        </li>
                     </ul>
                 </div>
                 <Newsletter />
             </div>
             <div className={classes.branding}>
+                <h3><b>Ταμυναίων 36, Αλιβέρι Εύβοια</b></h3>
                 <ul className={classes.legal}>
-                    <li data-cy="Footer-terms" className={classes.terms}>
+                    {/* <li data-cy="Footer-terms" className={classes.terms}>
                         <FormattedMessage
                             id={'footer.termsText'}
                             defaultMessage={'Terms of Use'}
@@ -105,7 +103,7 @@ const Footer = props => {
                             id={'footer.privacyText'}
                             defaultMessage={'Privacy Policy'}
                         />
-                    </li>
+                    </li> */}
                 </ul>
                 <p className={classes.copyright}>{copyrightText || null}</p>
                 <Link

@@ -7,12 +7,16 @@
     composes: h-auto from global;
     composes: justify-center from global;
     composes: px-4 from global;
-    composes: top-0 from global;
-    composes: sticky from global;
     composes: w-full from global;
-    composes: z-header from global;
 
     composes: lg_px-8 from global;
+}
+
+.stickyWrapper {
+    composes: sticky from global;
+    composes: top-0 from global;
+    composes: w-full from global;
+    composes: z-header from global;
 }
 
 .switchers {

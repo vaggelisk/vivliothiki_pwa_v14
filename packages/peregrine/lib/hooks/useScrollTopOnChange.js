@@ -10,7 +10,7 @@ export const useScrollTopOnChange = watched => {
         if (!globalThis.scrollTo) return;
 
         globalThis.scrollTo({
-            behavior: 'smooth',
+            behavior: 'auto',
             left: 0,
             top: 0
         });

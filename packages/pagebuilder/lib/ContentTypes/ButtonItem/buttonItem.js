@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useRef } from 'react';
 import { arrayOf, oneOf, string, bool } from 'prop-types';
 import { useHistory } from 'react-router-dom';
 import { useStyle } from '@magento/venia-ui/lib/classify';
@@ -21,6 +21,7 @@ import defaultClasses from './buttonItem.module.css';
  */
 const ButtonItem = props => {
     const classes = useStyle(defaultClasses, props.classes);
+    const buttonRef = useRef(null);
 
     const {
         buttonType,
@@ -87,6 +88,12 @@ const ButtonItem = props => {
         }
     }, [openInNewTab, url, linkProps.to]); // eslint-disable-line react-hooks/exhaustive-deps
 
+    const handleTouchStart = useCallback(() => {
+        if (buttonRef.current) {
+            buttonRef.current.click();
+        }
+    }, []);
+
     const justifyMap = {
         left: 'flex-start',
         center: 'center',
@@ -99,9 +106,11 @@ const ButtonItem = props => {
 
     const buttonProps = {
         onClick: handleClick,
+        onTouchStart: handleTouchStart,
         priority: typeToPriorityMapping[buttonType],
         style: dynamicInnerStyles,
-        type: 'button'
+        type: 'button',
+        buttonRef
     };
 
     // Custom style link type until PWA-937 adds link styled buttons
