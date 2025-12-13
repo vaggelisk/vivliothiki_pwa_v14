@@ -57,14 +57,16 @@ const Header = props => {
 
     return (
         <Fragment>
-            <div className={classes.switchersContainer}>
-                <div className={classes.switchers} data-cy="Header-switchers">
-                    <StoreSwitcher />
-                    <CurrencySwitcher />
+            <div className={classes.stickyWrapper}>
+                <div className={classes.switchersContainer}>
+                    <div className={classes.switchers} data-cy="Header-switchers">
+                        <StoreSwitcher />
+                        <CurrencySwitcher />
+                        Ταμυναίων 36, Αλιβέρι Εύβοια
+                    </div>
                 </div>
-            </div>
-            <header className={rootClass} data-cy="Header-root">
-                <div className={classes.toolbar}>
+                <header className={rootClass} data-cy="Header-root">
+                    <div className={classes.toolbar}>
                     <div className={classes.primaryActions}>
                         <NavTrigger />
                     </div>
@@ -77,19 +79,20 @@ const Header = props => {
                     >
                         <Logo classes={{ logo: classes.logo }} />
                     </Link>
-                    <MegaMenu />
-                    <div className={classes.secondaryActions}>
-                        <SearchTrigger
-                            onClick={handleSearchTriggerClick}
-                            ref={searchTriggerRef}
-                        />
-                        <AccountTrigger />
-                        <CartTrigger />
+                        <MegaMenu />
+                        <div className={classes.secondaryActions}>
+                            <SearchTrigger
+                                onClick={handleSearchTriggerClick}
+                                ref={searchTriggerRef}
+                            />
+                            <AccountTrigger />
+                            <CartTrigger />
+                        </div>
                     </div>
-                </div>
-                {searchBar}
-                <PageLoadingIndicator absolute />
-            </header>
+                    {searchBar}
+                    <PageLoadingIndicator absolute />
+                </header>
+            </div>
             <OnlineIndicator
                 hasBeenOffline={hasBeenOffline}
                 isOnline={isOnline}

@@ -2,15 +2,13 @@ import { ContactLink } from '../ContactPage';
 
 const accountLinks = new Map()
     .set('Account', null)
-    .set('Sign In', null)
-    .set('Register', null)
-    .set('Returns', null);
+    .set('Sign In', '/sign-in')
+    .set('Register', '/create-account');
 
 const aboutLinks = new Map()
-    .set('About Us', '/about-us')
-    .set('Our Story', null)
+    .set('About Us', null)
+    .set('Our Story', '/about-us')
     .set('Email Signup', null)
-    .set('Give Back', null);
 
 const helpLinks = new Map()
     .set('Help', null)
@@ -18,8 +16,7 @@ const helpLinks = new Map()
         path: '/contact-us',
         Component: ContactLink
     })
-    .set('Order Status', null)
-    .set('Returns', null);
+    .set('Order Status', '/order-history');
 
 export const DEFAULT_LINKS = new Map()
     .set('account', accountLinks)

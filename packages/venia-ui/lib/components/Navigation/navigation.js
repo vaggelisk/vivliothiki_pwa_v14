@@ -79,6 +79,7 @@ const Navigation = props => {
                         <div className={classes.switchers}>
                             <StoreSwitcher />
                             <CurrencySwitcher />
+                            <span style={{ marginLeft: '1rem' }}>Ταμυναίων 36, Αλιβέρι Εύβοια</span>
                         </div>
                         <AuthBar
                             disabled={hasModal}
