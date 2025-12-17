@@ -90,21 +90,17 @@ const Footer = props => {
                 <Newsletter />
             </div>
             <div className={classes.branding}>
-                <h3><b>Ταμυναίων 36, Αλιβέρι Εύβοια</b></h3>
-                <ul className={classes.legal}>
-                    {/* <li data-cy="Footer-terms" className={classes.terms}>
-                        <FormattedMessage
-                            id={'footer.termsText'}
-                            defaultMessage={'Terms of Use'}
-                        />
-                    </li>
-                    <li data-cy="Footer-privacy" className={classes.privacy}>
-                        <FormattedMessage
-                            id={'footer.privacyText'}
-                            defaultMessage={'Privacy Policy'}
-                        />
-                    </li> */}
-                </ul>
+                <div className={classes.contactInfo}>
+                    <h3>
+                        <b>Ταμυναίων 36, Αλιβέρι Εύβοια</b>
+                    </h3>
+                    <h3>
+                        <b>Δευτέρες 10-7</b>
+                    </h3>
+                    <h3>
+                        <b>Σάββατα 10-3</b>
+                    </h3>
+                </div>
                 <p className={classes.copyright}>{copyrightText || null}</p>
                 <Link
                     to={resourceUrl('/')}
