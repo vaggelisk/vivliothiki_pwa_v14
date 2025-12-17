@@ -3,11 +3,12 @@
     composes: col-start-3 from global;
     composes: flex-grow from global;
     composes: hidden from global;
-    composes: justify-self-center from global;
+    justify-self: flex-start;
 }
 
 @media (min-width: 90.625rem) {
     .megaMenu {
         display: flex;
+        margin-left: -8rem;
     }
 }
