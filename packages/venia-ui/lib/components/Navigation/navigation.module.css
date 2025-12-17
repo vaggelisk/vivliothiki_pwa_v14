@@ -67,12 +67,26 @@
 
 .switchers {
     composes: bg-gray-100 from global;
+    composes: flex from global;
+    composes: flex-col from global;
+    composes: gap-y-xs from global;
+    composes: sm_hidden from global;
+    composes: px-sm from global;
+    composes: py-2xs from global;
+}
+
+.switcherControls {
     composes: grid from global;
     composes: grid-flow-col from global;
-    composes: justify-between from global;
-    composes: w-full from global;
+    composes: gap-x-xs from global;
+    composes: items-center from global;
+}
 
-    composes: sm_hidden from global;
+.topbarInfo {
+    composes: grid from global;
+    composes: gap-y-1xs from global;
+    composes: text-subtle from global;
+    composes: text-colorDefault from global;
 }
 
 .modal {

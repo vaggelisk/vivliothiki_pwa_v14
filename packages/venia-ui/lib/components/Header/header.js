@@ -60,9 +60,14 @@ const Header = props => {
             <div className={classes.stickyWrapper}>
                 <div className={classes.switchersContainer}>
                     <div className={classes.switchers} data-cy="Header-switchers">
-                        <StoreSwitcher />
-                        <CurrencySwitcher />
-                        Ταμυναίων 36, Αλιβέρι Εύβοια
+                        <div className={classes.switcherControls}>
+                            <StoreSwitcher />
+                            <CurrencySwitcher />
+                        </div>
+                        <div className={classes.topbarInfo}>
+                            <span>Ταμυναίων 36, Αλιβέρι Εύβοια</span>
+                            <span>Δευτέρες 10-7  &  Σάββατα 10-3</span>
+                        </div>
                     </div>
                 </div>
                 <header className={rootClass} data-cy="Header-root">

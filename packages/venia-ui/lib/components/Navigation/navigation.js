@@ -77,9 +77,14 @@ const Navigation = props => {
                     </div>
                     <div className={classes.footer}>
                         <div className={classes.switchers}>
-                            <StoreSwitcher />
-                            <CurrencySwitcher />
-                            <span style={{ marginLeft: '1rem' }}>Ταμυναίων 36, Αλιβέρι Εύβοια</span>
+                            <div className={classes.switcherControls}>
+                                <StoreSwitcher />
+                                <CurrencySwitcher />
+                            </div>
+                            <div className={classes.topbarInfo}>
+                                <span>Ταμυναίων 36, Αλιβέρι Εύβοια</span>
+                                <span>Δευτέρες 10-7 & Σάββατα 10-3</span>
+                            </div>
                         </div>
                         <AuthBar
                             disabled={hasModal}
