@@ -190,3 +190,24 @@
         box-shadow: 0 var(--dot-size) 0 0;
     }
 }
+
+@media (max-width: 90.624rem) {
+    .toolbar {
+        grid-template-columns: auto 1fr auto;
+    }
+
+    .logoContainer {
+        grid-column: 2;
+        justify-self: center;
+        margin-right: 0;
+    }
+
+    .primaryActions {
+        grid-column: 1;
+    }
+
+    .secondaryActions {
+        grid-column: 3;
+        justify-self: end;
+    }
+}
