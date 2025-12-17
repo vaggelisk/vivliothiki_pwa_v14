@@ -99,6 +99,21 @@
     composes: lg_text-left from global;
 }
 
+.contactInfo {
+    composes: gap-3xs from global;
+    composes: grid from global;
+    composes: text-right from global;
+    composes: justify-items-end from global;
+    grid-area: c;
+}
+
+@media screen(-lg) {
+    .contactInfo {
+        composes: text-center from global;
+        composes: justify-items-center from global;
+    }
+}
+
 @media screen(-lg) {
     .branding {
         grid-template-areas: 'c' 'b' 'a';
@@ -109,17 +124,6 @@
     .branding {
         grid-template-columns: minmax(200px, 1fr) auto minmax(200px, 1fr);
     }
-}
-
-.legal {
-    composes: gap-xs from global;
-    composes: grid from global;
-    composes: grid-flow-col from global;
-    composes: items-center from global;
-    composes: justify-center from global;
-    grid-area: c;
-
-    composes: lg_justify-end from global;
 }
 
 .copyright {
