@@ -20,15 +20,30 @@
 }
 
 .switchers {
-    composes: auto-cols-max from global;
-    composes: grid from global;
-    composes: grid-flow-col from global;
-    composes: justify-end from global;
     composes: max-w-site from global;
     composes: mx-auto from global;
     composes: relative from global;
     composes: w-full from global;
     composes: z-menu from global;
+    composes: flex from global;
+    composes: items-center from global;
+    composes: justify-between from global;
+    composes: gap-x-md from global;
+}
+
+.switcherControls {
+    composes: grid from global;
+    composes: grid-flow-col from global;
+    composes: gap-x-xs from global;
+    composes: items-center from global;
+}
+
+.topbarInfo {
+    composes: grid from global;
+    composes: grid-flow-col from global;
+    composes: gap-x-md from global;
+    composes: text-subtle from global;
+    composes: text-colorDefault from global;
 }
 
 .switchersContainer {
@@ -173,5 +188,26 @@
     }
     40% {
         box-shadow: 0 var(--dot-size) 0 0;
+    }
+}
+
+@media (max-width: 90.624rem) {
+    .toolbar {
+        grid-template-columns: auto 1fr auto;
+    }
+
+    .logoContainer {
+        grid-column: 2;
+        justify-self: center;
+        margin-right: 0;
+    }
+
+    .primaryActions {
+        grid-column: 1;
+    }
+
+    .secondaryActions {
+        grid-column: 3;
+        justify-self: end;
     }
 }

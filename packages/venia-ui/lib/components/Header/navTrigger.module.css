@@ -3,6 +3,10 @@
 
     composes: h-[3rem] from global;
     composes: w-[3rem] from global;
+}
 
-    composes: lg_hidden from global;
+@media (min-width: 90.625rem) {
+    .root {
+        display: none;
+    }
 }
