@@ -115,7 +115,7 @@ const AddressBookPage = props => {
                 <LinkButton
                     className={classes.addButton}
                     key="addAddressButton"
-                    onClick={handleAddAddress}
+                    onPress={handleAddAddress}
                     data-cy="AddressBookPage-addButton"
                 >
                     <Icon
