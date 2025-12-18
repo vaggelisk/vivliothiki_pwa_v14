@@ -45,6 +45,9 @@ const CustomerForm = props => {
     const { formatMessage } = useIntl();
     const classes = useStyle(defaultClasses, propClasses);
 
+    const STEREA_ELLADA_REGION_ID = 789; // replace if your store returns a different id
+
+
     if (isLoading) {
         return (
             <LoadingIndicator>
@@ -202,6 +205,7 @@ const CustomerForm = props => {
                 <div className={classes.country}>
                     <Country
                         validate={isRequired}
+                        initialValue="GR"
                         data-cy="CustomerForm-country"
                         aria-label={formatMessage({
                             id: 'global.countryRequired',
@@ -219,6 +223,7 @@ const CustomerForm = props => {
                     >
                         <TextInput
                             field="street[0]"
+                            initialValue="Αλιβέρι"
                             validate={isRequired}
                             id="customer_street0"
                             data-cy="CustomerForm-street0"
@@ -260,6 +265,7 @@ const CustomerForm = props => {
                         <TextInput
                             field="city"
                             validate={isRequired}
+                            initialValue="Αλιβέρι"
                             id="customer_city"
                             data-cy="CustomerForm-city"
                             aria-label={formatMessage({
@@ -274,6 +280,7 @@ const CustomerForm = props => {
                     <Region
                         regionError={regionError}
                         data-cy="CustomerForm-region"
+                        initialValue={STEREA_ELLADA_REGION_ID}
                         fieldInput={'region[region]'}
                         fieldSelect={'region[region_id]'}
                         optionValueKey={'id'}
@@ -299,6 +306,7 @@ const CustomerForm = props => {
                 <div className={classes.postcode}>
                     <Postcode
                         validate={isRequired}
+                        initialValue="34500"
                         data-cy="CustomerForm-postcode"
                         aria-label={formatMessage({
                             id: 'global.postalCodeRequired',
@@ -316,6 +324,7 @@ const CustomerForm = props => {
                     >
                         <TextInput
                             field="telephone"
+                            initialValue="6901234567"
                             validate={isRequired}
                             id="customer_telephone"
                             data-cy="CustomerForm-telephone"
