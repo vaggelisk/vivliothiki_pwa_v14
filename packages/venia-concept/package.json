@@ -18,6 +18,7 @@
     "build:report": "buildpack generate-build-report",
     "buildpack": "buildpack",
     "clean": "rimraf dist",
+    "generate:sitemap": "node scripts/generate-sitemap.js",
     "lint": "eslint --ignore-path .gitignore 'src/**/{*.js,package.json}'",
     "prettier": "prettier --loglevel warn --ignore-path .gitignore 'src/**/*.@(css|graphql|js)' '*.js'",
     "prettier:check": "yarn run -s prettier -- --check",
@@ -37,7 +38,8 @@
   "dependencies": {
     "@magento/experience-platform-connector": "~1.0.10",
     "@magento/pwa-buildpack": "~11.5.3",
-    "dompurify": "~3.2.4"
+    "dompurify": "~3.2.4",
+    "sitemap": "^7.1.1"
   },
   "devDependencies": {
     "@adobe/apollo-link-mutation-queue": "~1.0.2",
