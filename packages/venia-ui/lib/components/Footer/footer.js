@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-import { Facebook, Instagram, Twitter } from 'react-feather';
+import { Facebook, Instagram, Mail } from 'react-feather';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { Link } from 'react-router-dom';
 import { shape, string } from 'prop-types';
@@ -80,10 +80,35 @@ const Footer = props => {
                     </p>
                     <ul className={classes.socialLinks}>
                         <li>
-                            <Instagram size={20} />
+                            <a
+                                href="https://www.instagram.com/avtoorganomeni_vivliothiki"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                aria-label="Vivliothiki Evia Instagram"
+                                className={classes.socialLink}
+                            >
+                                <Instagram size={20} />
+                            </a>
                         </li>
                         <li>
-                            <Facebook size={20} />
+                            <a
+                                href="https://www.facebook.com/vivliothikievia"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                aria-label="Vivliothiki Evia Facebook"
+                                className={classes.socialLink}
+                            >
+                                <Facebook size={20} />
+                            </a>
+                        </li>
+                        <li>
+                            <a
+                                href="mailto:vivliothiki.evias@gmail.com"
+                                aria-label="Email Vivliothiki Evia"
+                                className={classes.socialLink}
+                            >
+                                <Mail size={20} />
+                            </a>
                         </li>
                     </ul>
                 </div>
