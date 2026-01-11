@@ -1,5 +1,6 @@
 const { configureWebpack, graphQL } = require('@magento/pwa-buildpack');
 const HTMLWebpackPlugin = require('html-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 const webpack = require('webpack');
 const fs = require('fs');
 const { promisify } = require('util');
@@ -140,7 +141,16 @@ module.exports = async env => {
             ),
             __DEV__: process.env.NODE_ENV !== 'production'
         }),
-        new HTMLWebpackPlugin(htmlWebpackConfig)
+        new HTMLWebpackPlugin(htmlWebpackConfig),
+        new CopyWebpackPlugin({
+            patterns: [
+                {
+                    from: path.resolve(__dirname, 'sitemap.xml'),
+                    to: 'sitemap.xml',
+                    noErrorOnMissing: true
+                }
+            ]
+        })
     ];
 
     /*

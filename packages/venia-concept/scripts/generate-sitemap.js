@@ -136,14 +136,31 @@ async function generate() {
     links.forEach(link => sitemap.write(link));
     sitemap.end();
 
-    const xml = await streamToPromise(sitemap);
-    const outputPath = path.resolve(__dirname, '../sitemap.xml');
-    fs.writeFileSync(outputPath, xml.toString());
+    const xmlBuffer = await streamToPromise(sitemap);
+    const outputPaths = writeSitemapFiles(xmlBuffer);
 
-    console.log(`Generated sitemap with ${links.length} URLs at ${outputPath}`);
+    console.log(
+        `Generated sitemap with ${links.length} URLs:\n${outputPaths
+            .map(target => ` - ${target}`)
+            .join('\n')}`
+    );
 }
 
 generate().catch(err => {
     console.error(err);
     process.exit(1);
 });
+
+function writeSitemapFiles(xmlBuffer) {
+    const targets = [
+        path.resolve(__dirname, '../sitemap.xml'),
+        path.resolve(__dirname, '../venia-static/sitemap.xml')
+    ];
+
+    targets.forEach(targetPath => {
+        fs.mkdirSync(path.dirname(targetPath), { recursive: true });
+        fs.writeFileSync(targetPath, xmlBuffer);
+    });
+
+    return targets;
+}

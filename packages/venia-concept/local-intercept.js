@@ -17,6 +17,52 @@
  * or modify functionality from its dependencies.
  */
 
-function localIntercept() {}
+function localIntercept(targets) {
+    const builtins = targets.of('@magento/pwa-buildpack');
+
+    builtins.transformUpward.tap(definitions => {
+        const veniaResponse = definitions?.veniaResponse;
+        if (!veniaResponse || !Array.isArray(veniaResponse.when)) {
+            return;
+        }
+
+        const resolverName = 'generatedSitemap';
+        definitions[resolverName] = {
+            inline: {
+                status: 200,
+                headers: {
+                    resolver: 'inline',
+                    inline: {
+                        'content-type': {
+                            inline: 'application/xml'
+                        },
+                        'cache-control': {
+                            inline: 's-maxage=3600'
+                        }
+                    }
+                },
+                body: {
+                    resolver: 'file',
+                    parse: {
+                        inline: 'text'
+                    },
+                    encoding: {
+                        inline: 'utf8'
+                    },
+                    file: {
+                        resolver: 'inline',
+                        inline: './sitemap.xml'
+                    }
+                }
+            }
+        };
+
+        veniaResponse.when.unshift({
+            matches: 'request.url.pathname',
+            pattern: '^/sitemap\\.xml$',
+            use: resolverName
+        });
+    });
+}
 
 module.exports = localIntercept;
