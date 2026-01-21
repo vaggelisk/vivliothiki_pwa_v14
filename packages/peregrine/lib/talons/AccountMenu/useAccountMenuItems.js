@@ -37,16 +37,6 @@ export const useAccountMenuItems = props => {
             url: '/address-book'
         },
         {
-            name: 'Saved Payments',
-            id: 'accountMenu.savedPaymentsLink',
-            url: '/saved-payments'
-        },
-        {
-            name: 'Communications',
-            id: 'accountMenu.communicationsLink',
-            url: '/communications'
-        },
-        {
             name: 'Account Information',
             id: 'accountMenu.accountInfoLink',
             url: '/account-information'
