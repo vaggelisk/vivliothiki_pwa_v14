@@ -137,6 +137,8 @@
     "contactPage.comment": "Μήνυμα",
     "contactPage.commentPlaceholder": "Πείτε μας τι έχετε στο μυαλό σας",
     "contactPage.submit": "Αποστολη",
+    "contactPage.submitMessage": "Το μήνυμά σας στάλθηκε επιτυχώς.",
+    "contactPage.successDialogTitle": "Ευχαριστούμε για την επικοινωνία",
     "country.label": "Χώρα",
     "couponCode.apply": "Εφαρμογη",
     "couponCode.couponCode": "Κωδικός κουπονιού",

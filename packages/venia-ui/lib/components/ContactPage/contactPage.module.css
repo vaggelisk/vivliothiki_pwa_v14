@@ -79,3 +79,19 @@
     /* Medium */
     composes: md_text-left from global;
 }
+
+.successDialogHeader {
+    composes: text-2xl from global;
+    composes: font-semibold from global;
+}
+
+.successDialogContents {
+    composes: text-center from global;
+    composes: py-8 from global;
+    composes: px-6 from global;
+}
+
+.successDialogMessage {
+    composes: text-lg from global;
+    composes: leading-relaxed from global;
+}

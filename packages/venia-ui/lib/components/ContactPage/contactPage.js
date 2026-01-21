@@ -1,15 +1,17 @@
-import React, { Fragment, useEffect } from 'react';
+import React, { Fragment, useCallback, useEffect, useState } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { shape, string } from 'prop-types';
 import { Form } from 'informed';
+import { useHistory } from 'react-router-dom';
 
-import { useToasts } from '@magento/peregrine';
 import { useContactPage } from '@magento/peregrine/lib/talons/ContactPage';
+import resourceUrl from '@magento/peregrine/lib/util/makeUrl';
 
 import { useStyle } from '../../classify';
 import { isRequired } from '../../util/formValidators';
 
 import Button from '../Button';
+import Dialog from '../Dialog';
 import CmsBlock from '../CmsBlock/block';
 import { Meta, StoreTitle } from '../Head';
 import FormError from '../FormError';
@@ -30,10 +32,11 @@ const ContactPage = props => {
     const { classes: propClasses } = props;
     const classes = useStyle(defaultClasses, propClasses);
     const { formatMessage } = useIntl();
+    const history = useHistory();
     const talonProps = useContactPage({
         cmsBlockIdentifiers: [BANNER_IDENTIFIER, SIDEBAR_IDENTIFIER]
     });
-    const [, { addToast }] = useToasts();
+    const [isSuccessDialogOpen, setSuccessDialogOpen] = useState(false);
 
     const {
         isEnabled,
@@ -46,18 +49,28 @@ const ContactPage = props => {
         response
     } = talonProps;
 
+    const handleSuccessDialogDismiss = useCallback(() => {
+        setSuccessDialogOpen(false);
+        history.push(resourceUrl('/'));
+    }, [history]);
+
     useEffect(() => {
         if (response && response.status) {
-            addToast({
-                type: 'success',
-                message: formatMessage({
-                    id: 'contactPage.submitMessage',
-                    defaultMessage: 'Your message has been sent.'
-                }),
-                timeout: 5000
-            });
+            setSuccessDialogOpen(true);
         }
-    }, [addToast, formatMessage, response]);
+    }, [response]);
+
+    useEffect(() => {
+        if (!isSuccessDialogOpen) {
+            return undefined;
+        }
+
+        const timer = setTimeout(() => {
+            handleSuccessDialogDismiss();
+        }, 2000);
+
+        return () => clearTimeout(timer);
+    }, [handleSuccessDialogDismiss, isSuccessDialogOpen]);
 
     if (!isLoading && !isEnabled) {
         return (
@@ -248,6 +261,31 @@ const ContactPage = props => {
                     {contactUsSidebar}
                 </div>
             </article>
+            <Dialog
+                isModal
+                isOpen={isSuccessDialogOpen}
+                onCancel={handleSuccessDialogDismiss}
+                onConfirm={handleSuccessDialogDismiss}
+                shouldDisableAllButtons
+                shouldShowButtons={false}
+                title={
+                    <FormattedMessage
+                        id={'contactPage.successDialogTitle'}
+                        defaultMessage={'Message sent'}
+                    />
+                }
+                classes={{
+                    contents: classes.successDialogContents,
+                    headerText: classes.successDialogHeader
+                }}
+            >
+                <p className={classes.successDialogMessage}>
+                    <FormattedMessage
+                        id={'contactPage.submitMessage'}
+                        defaultMessage={'Your message has been sent.'}
+                    />
+                </p>
+            </Dialog>
         </Fragment>
     );
 };
@@ -263,7 +301,10 @@ ContactPage.propTypes = {
         title: string,
         subtitle: string,
         form: string,
-        buttonsContainer: string
+        buttonsContainer: string,
+        successDialogContents: string,
+        successDialogHeader: string,
+        successDialogMessage: string
     })
 };
 

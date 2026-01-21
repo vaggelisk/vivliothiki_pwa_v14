@@ -136,6 +136,8 @@
     "contactPage.comment": "Message",
     "contactPage.commentPlaceholder": "Tell us what's on your mind",
     "contactPage.submit": "Send",
+    "contactPage.submitMessage": "Your message has been sent.",
+    "contactPage.successDialogTitle": "Thank you!",
     "country.label": "Country",
     "couponCode.apply": "Apply",
     "couponCode.couponCode": "Coupon Code",
