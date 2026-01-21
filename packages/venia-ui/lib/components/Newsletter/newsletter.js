@@ -9,7 +9,6 @@ import { useToasts } from '@magento/peregrine';
 import { isRequired } from '../../util/formValidators';
 import { useStyle } from '../../classify';
 import FormError from '../FormError';
-import Button from '../Button';
 import Field from '../Field';
 import LoadingIndicator from '../LoadingIndicator';
 import TextInput from '../TextInput';
@@ -121,19 +120,6 @@ const Newsletter = props => {
                         defaultMessage={'Subscribe'}
                     />
                 </LinkButton>
-                <div className={classes.buttonsContainer}>
-                    <Button
-                        priority="normal"
-                        type="submit"
-                        disabled={isBusy}
-                        onClick={clearErrors}
-                    >
-                        <FormattedMessage
-                            id={'newsletter.subscribeText'}
-                            defaultMessage={'Subscribe'}
-                        />
-                    </Button>
-                </div>
             </Form>
         </div>
     );
@@ -144,8 +130,7 @@ Newsletter.propTypes = {
         modal_active: string,
         root: string,
         title: string,
-        form: string,
-        buttonsContainer: string
+        form: string
     })
 };
 

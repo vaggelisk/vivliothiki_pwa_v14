@@ -6,7 +6,6 @@ import { shape, string } from 'prop-types';
 import { useFooter } from '@magento/peregrine/lib/talons/Footer/useFooter';
 
 import Logo from '../Logo';
-import Newsletter from '../Newsletter';
 import { useStyle } from '../../classify';
 import defaultClasses from './footer.module.css';
 import { DEFAULT_LINKS, LOREM_IPSUM } from './sampleData';
@@ -112,7 +111,6 @@ const Footer = props => {
                         </li>
                     </ul>
                 </div>
-                <Newsletter />
             </div>
             <div className={classes.branding}>
                 <div className={classes.contactInfo}>

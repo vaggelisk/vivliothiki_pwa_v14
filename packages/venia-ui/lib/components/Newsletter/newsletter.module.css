@@ -16,35 +16,9 @@
     composes: relative from global;
 }
 
-.form input {
-    padding-right: calc(
-        theme(spacing[7.5]) * var(--iconsAfter) + theme(spacing[2.5]) +
-            theme(spacing[20])
-    );
-}
-
-@media screen(-md) {
-    .form input {
-        padding-right: calc(
-            theme(spacing[7.5]) * var(--iconsAfter) + theme(spacing[2.5])
-        );
-    }
-}
-
 .form label {
     @apply absolute;
     @apply z-behind;
-}
-
-.buttonsContainer {
-    composes: gap-sm from global;
-    composes: grid from global;
-    composes: grid-flow-row from global;
-    composes: justify-center from global;
-    composes: mt-xs from global;
-    composes: w-full from global;
-
-    composes: md_hidden from global;
 }
 
 .title {
@@ -56,20 +30,13 @@
 }
 
 .subscribe_link {
-    composes: absolute from global;
-    composes: bg-white from global;
-    composes: hidden from global;
-    composes: max-h-[35px] from global;
-    composes: px-3 from global;
-    composes: py-0 from global;
-    composes: right-1 from global;
+    composes: inline-flex from global;
+    composes: items-center from global;
+    composes: justify-center from global;
     composes: text-colorDefault from global;
-    composes: top-0 from global;
     composes: underline from global;
-    min-height: 35px;
-    transform: translateY(7%);
-
-    composes: md_inline-block from global;
+    composes: font-semibold from global;
+    composes: mt-sm from global;
 }
 
 .newsletter_text {

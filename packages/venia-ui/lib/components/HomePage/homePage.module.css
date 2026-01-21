@@ -12,12 +12,14 @@
 /*
  * Target all buttons.
  */
-:global(.venia-home-row-1 a) {
+:global(.venia-home-row-1 a),
+:global(.venia-home-row-1 button),
+:global(.venia-home-button) {
     align-items: center;
-    background-color: transparent;
+    background-color: hsl(var(--brightBlue));
     border: 2px solid hsl(var(--brightBlue));
     border-radius: 1.25rem;
-    color: hsl(var(--brightBlue));
+    color: white;
     display: inline-flex;
     font-size: 14px !important;
     font-weight: 700 !important;
@@ -30,8 +32,22 @@
     text-decoration: none !important;
     text-transform: uppercase;
 }
+
+:global(.venia-home-row-1 a:hover),
+:global(.venia-home-row-1 button:hover),
+:global(.venia-home-button:hover) {
+    background-color: transparent;
+    color: hsl(var(--brightBlue));
+}
+
 :global(.venia-home-row-1 a:active),
-:global(.venia-home-row-1 a:focus) {
+:global(.venia-home-row-1 a:focus),
+:global(.venia-home-row-1 button:active),
+:global(.venia-home-row-1 button:focus),
+:global(.venia-home-button:active),
+:global(.venia-home-button:focus) {
+    background-color: transparent;
+    color: hsl(var(--brightBlue));
     box-shadow: -6px 6px hsl(var(--brightBlue) / 0.3);
     outline: none;
 }
