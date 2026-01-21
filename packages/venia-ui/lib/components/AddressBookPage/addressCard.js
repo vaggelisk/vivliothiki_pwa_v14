@@ -71,7 +71,7 @@ const AddressCard = props => {
     const deleteButtonElement = !default_shipping ? (
         <LinkButton
             classes={{ root: classes.deleteButton }}
-            onClick={onDelete}
+            onPress={onDelete}
             data-cy="addressCard-deleteButton"
         >
             <Icon classes={{ icon: null }} size={16} src={TrashIcon} />
@@ -92,7 +92,7 @@ const AddressCard = props => {
                 priority="normal"
                 type="button"
                 negative={true}
-                onClick={onConfirmDelete}
+                onPress={onConfirmDelete}
                 data-cy="addressCard-confirmDeleteButton"
             >
                 <FormattedMessage
@@ -105,7 +105,7 @@ const AddressCard = props => {
                 disabled={isDeletingCustomerAddress}
                 priority="low"
                 type="button"
-                onClick={onCancelDelete}
+                onPress={onCancelDelete}
             >
                 <FormattedMessage
                     id={'global.cancelButton'}
@@ -141,7 +141,7 @@ const AddressCard = props => {
             <div className={classes.actionContainer}>
                 <LinkButton
                     classes={{ root: classes.editButton }}
-                    onClick={onEdit}
+                    onPress={onEdit}
                     data-cy="addressCard-editButton"
                 >
                     <Icon classes={{ icon: null }} size={16} src={EditIcon} />

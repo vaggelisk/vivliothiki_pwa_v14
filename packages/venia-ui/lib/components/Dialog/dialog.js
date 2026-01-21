@@ -90,7 +90,7 @@ const Dialog = props => {
                 data-cy="Dialog-cancelButton"
                 classes={cancelButtonClasses}
                 disabled={shouldDisableAllButtons}
-                onClick={onCancel}
+                onPress={onCancel}
                 priority="low"
                 type="reset"
             >
@@ -103,6 +103,7 @@ const Dialog = props => {
                 data-cy="Dialog-confirmButton"
                 classes={confirmButtonClasses}
                 disabled={confirmButtonDisabled}
+                onPress={onConfirm}
                 priority="high"
                 type="submit"
             >

@@ -90,7 +90,7 @@ const AccountInformationPage = props => {
                         <Button
                             className={classes.editInformationButton}
                             disabled={false}
-                            onClick={showUpdateMode}
+                            onPress={showUpdateMode}
                             priority="normal"
                             data-cy="AccountInformationPage-editInformationButton"
                         >
