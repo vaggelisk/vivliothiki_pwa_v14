@@ -28,6 +28,10 @@
     composes: pt-xs from global;
 }
 
+.changePasswordButton {
+    composes: root from '../LinkButton/linkButton.module.css';
+}
+
 @media screen(-lg) {
     .firstname,
     .lastname,

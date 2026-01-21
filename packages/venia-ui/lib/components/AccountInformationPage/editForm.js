@@ -53,9 +53,9 @@ const EditForm = props => {
             data-cy="editForm-changePasswordButtonContainer"
         >
             <LinkButton
-                classes={classes.changePasswordButton}
+                classes={{ root: classes.changePasswordButton }}
                 type="button"
-                onClick={handleChangePassword}
+                onPress={handleChangePassword}
                 data-cy="linkButton-root"
             >
                 <FormattedMessage
