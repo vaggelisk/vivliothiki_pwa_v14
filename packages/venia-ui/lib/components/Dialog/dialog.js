@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback, useMemo, useRef } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { bool, func, shape, string, object, node } from 'prop-types';
 import { Form } from 'informed';
@@ -66,6 +66,27 @@ const Dialog = props => {
     const confirmButtonDisabled =
         shouldDisableAllButtons || shouldDisableConfirmButton;
 
+    const formApiRef = useRef();
+    const mergedFormProps = useMemo(() => {
+        const { getApi, ...restProps } = formProps || {};
+
+        return {
+            ...restProps,
+            getApi: api => {
+                formApiRef.current = api;
+                if (typeof getApi === 'function') {
+                    getApi(api);
+                }
+            }
+        };
+    }, [formProps]);
+
+    const handleConfirmPress = useCallback(() => {
+        if (formApiRef.current) {
+            formApiRef.current.submitForm();
+        }
+    }, []);
+
     const cancelButtonClasses = {
         root_lowPriority: classes.cancelButton
     };
@@ -103,9 +124,9 @@ const Dialog = props => {
                 data-cy="Dialog-confirmButton"
                 classes={confirmButtonClasses}
                 disabled={confirmButtonDisabled}
-                onPress={onConfirm}
+                onPress={handleConfirmPress}
                 priority="high"
-                type="submit"
+                type="button"
             >
                 <FormattedMessage
                     id={confirmTranslationId}
@@ -115,11 +136,20 @@ const Dialog = props => {
         </div>
     ) : null;
 
+    const hiddenSubmit = (
+        <input
+            aria-hidden="true"
+            className={classes.hiddenSubmit}
+            tabIndex={-1}
+            type="submit"
+        />
+    );
+
     const maybeForm =
         isOpen || !shouldUnmountOnHide ? (
             <Form
                 className={classes.form}
-                {...formProps}
+                {...mergedFormProps}
                 onSubmit={onConfirm}
                 data-cy="Dialog-form"
             >
@@ -143,6 +173,7 @@ const Dialog = props => {
                     </div>
                     <div className={classes.body}>
                         <div className={classes.contents}>{children}</div>
+                        {hiddenSubmit}
                         {maybeButtons}
                     </div>
                 </div>
@@ -172,6 +203,7 @@ Dialog.propTypes = {
         header: string,
         headerText: string,
         headerButton: string,
+        hiddenSubmit: string,
         mask: string,
         root: string,
         root_open: string

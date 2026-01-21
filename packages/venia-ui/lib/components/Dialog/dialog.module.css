@@ -147,6 +147,10 @@
     composes: lg_grid-flow-col from global;
 }
 
+.hiddenSubmit {
+    display: none;
+}
+
 .confirmButton {
     composes: root_highPriority from '../Button/button.module.css';
 
